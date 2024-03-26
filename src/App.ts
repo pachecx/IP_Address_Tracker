@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import BgDesk from './assets/pattern-bg-desktop.png';
 
 export const Container = styled.div`
     min-width: 32rem;
@@ -9,19 +8,27 @@ export const Container = styled.div`
     position: relative;
     margin: 0 auto;
    
-   .imgBgMobile{
+   .imgBgMobile,
+   .imgBgDesk{
         position: absolute;
         z-index: -1;
         width: 100%;
         left: 0;
     }
 
+    .imgBgDesk{
+        display: none;
+    }
+
     @media(min-width: 760px){
         width: 100%;
-        background-image: url('./assets/pattern-bg-desktop.png');
 
         .imgBgMobile{
             display: none;
+        }
+
+        .imgBgDesk{
+            display: initial;
         }
     }
 `;
@@ -46,6 +53,10 @@ export const Search = styled.header`
             cursor: pointer;
         }
 
+        ::-webkit-input-placeholder{
+            font-size: 1.6rem;
+        }
+
         button{
             height: 4.8rem;
             width: 5.8rem;
@@ -66,6 +77,17 @@ export const Search = styled.header`
         color: #ffff;
         font-size: 2rem;
     }
+
+    @media(min-width: 760px){
+        h1{
+            margin-top: 4rem;
+        }
+        .inputDiv{
+            input{
+                width: 30%;
+            }
+        }
+    }
 `;
 
 export const Card = styled.div`
@@ -73,8 +95,6 @@ export const Card = styled.div`
     padding: 2.5rem 2.5rem 1rem;
     text-align: center;
     border-radius: 1rem;
-
-    border: 1px solid red;
 
     .info{
         margin-bottom: 1.5rem;
@@ -94,9 +114,26 @@ export const Card = styled.div`
    @media(min-width: 760px){
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        margin: 0 auto;
         align-items: center;
+        width: 70%;
 
         height: 16rem;
+        //border: 1px solid red;
+
+        .info{
+            width: 100%;
+            height: 8rem;
+            text-align: left;
+            padding: 0 9rem 0 2rem;
+        
+            p{
+                margin-top: 1.5rem;
+            }
+        }
+
+        .info:nth-child(-n+3){
+            border-right: 1px solid #939393;
+        }
     }
 `;
