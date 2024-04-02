@@ -1,12 +1,14 @@
-import { Container, Card, Search } from "./App";
+import { Container, Card, Search, Map } from "./App";
 import mobileBg from './assets/pattern-bg-mobile.png';
 import deskBg from './assets/pattern-bg-desktop.png';
 import iconArrow from './assets/icon-arrow.svg';
 
 import { api } from "./service/api.service";
-import { apiKey } from "./service/api.service";
+//import { apiKey } from "./service/api.service";
 
 import { useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 function App() {
 
@@ -32,13 +34,13 @@ function App() {
       <img 
         className="imgBgMobile"
         src={mobileBg} 
-        alt="Background image" 
+        alt="Background image mobile" 
       />
 
       <img 
         className="imgBgDesk"
         src={deskBg} 
-        alt="Background image" 
+        alt="Background image desktop" 
       />
 
       <Search>
@@ -52,7 +54,7 @@ function App() {
           <button type="submit" onClick={submit}>
             <img
               src={iconArrow}
-              alt=""
+              alt="svg search"
             />
           </button>
         </div>
@@ -60,7 +62,7 @@ function App() {
     
       <Card>
         <div className="info">
-          <span>IP ADRESS</span>
+          <span>IP ADDRESS</span>
             {!dataIp.ip ? (
               <p>192.212.174.101</p>
             ):(
@@ -83,7 +85,21 @@ function App() {
           <p>SpaceX Starlink</p>
         </div>
       </Card>
-
+      <Map>
+        <div className="map-Container">
+          <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[51.505, -0.09]}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+          </MapContainer>        
+        </div>
+      </Map>
       
     </Container>
   )

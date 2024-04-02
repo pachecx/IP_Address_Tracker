@@ -95,6 +95,8 @@ export const Card = styled.div`
     padding: 2.5rem 2.5rem 1rem;
     text-align: center;
     border-radius: 1rem;
+    margin: 0 auto;
+    width: 30rem;
 
     .info{
         margin-bottom: 1.5rem;
@@ -134,6 +136,29 @@ export const Card = styled.div`
 
         .info:nth-child(-n+3){
             border-right: 1px solid #939393;
+        }
+    }
+`;
+
+export const Map = styled.div`
+    margin-top: -95px;
+
+    .map-Container{
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: -1;
+
+        .leaflet-container{
+            height: 70.5vh;
+            width: 100%;
+        }
+    }
+
+    @media(min-width: 760px){
+        .map-Container .leaflet-container{
+            height: 62.1vh;
+            width: 100%;
         }
     }
 `;
