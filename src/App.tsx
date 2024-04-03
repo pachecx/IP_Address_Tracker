@@ -4,21 +4,23 @@ import deskBg from './assets/pattern-bg-desktop.png';
 import iconArrow from './assets/icon-arrow.svg';
 
 import { api } from "./service/api.service";
-//import { apiKey } from "./service/api.service";
+import { apiKey } from "./service/api.service";
 
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-function App() {
+export function App() {
 
-  const [ip, setIp] = useState<string>();
+  const [ip, setIp] = useState<string>("");
   const [dataIp, setDataIp] = useState<any>({})
 
   const submit = async() => {
+
+    if(!ip) return
     
     try {
-      const response = await api.get(`=${ip}`);
+      const response = await api.get(`?apiKey=${apiKey}&ipAddress=${ip}`);
       const data = response.data
 
       console.log(data)
@@ -28,7 +30,7 @@ function App() {
     }
   }
 
-  console.log(ip)
+  //console.log(dataIp.location.lat, dataIp.location.lng)
   return (
     <Container>
       <img 
@@ -72,22 +74,38 @@ function App() {
 
         <div className="info">
           <span>LOCATION</span>
+          {!dataIp.location ? (
           <p>Brooklyn, NY 10001</p>
+          ):(
+            <>
+              <p>{dataIp.location.region},</p> 
+              <strong>{dataIp.location.city},</strong> <br/>   
+              <strong>{dataIp.location.country }</strong>            
+            </>
+          )}
         </div>
         
         <div className="info">
           <span>TIME ZONE</span>
+          {!dataIp.location ? (
           <p>UTC - 05:00</p>
+          ):(
+            <p>{dataIp.location.timezone}</p>
+          )}
         </div>
 
         <div className="info">
           <span>ISP</span>
+          {!dataIp.location ? (
           <p>SpaceX Starlink</p>
+          ):(
+            <p>{dataIp.isp}</p>
+          )}
         </div>
       </Card>
       <Map>
         <div className="map-Container">
-          <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+          <MapContainer center={!dataIp.location ? ([51.505, -0.09]): ([dataIp.location.lat, dataIp.location.lng])} zoom={13}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -105,4 +123,3 @@ function App() {
   )
 }
 
-export default App
