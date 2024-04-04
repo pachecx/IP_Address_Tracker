@@ -70,7 +70,6 @@ export const Search = styled.header`
             background: gray;
             transition: .1s;
         }
-        
     }
 
     h1{
@@ -119,9 +118,7 @@ export const Card = styled.div`
         margin: 0 auto;
         align-items: center;
         width: 70%;
-
         height: 16rem;
-        //border: 1px solid red;
 
         .info{
             width: 100%;

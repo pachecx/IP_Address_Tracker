@@ -2,10 +2,8 @@ import { Container, Card, Search, Map } from "./App";
 import mobileBg from './assets/pattern-bg-mobile.png';
 import deskBg from './assets/pattern-bg-desktop.png';
 import iconArrow from './assets/icon-arrow.svg';
-
 import { api } from "./service/api.service";
 import { apiKey } from "./service/api.service";
-
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -22,7 +20,6 @@ export function App() {
     try {
       const response = await api.get(`?apiKey=${apiKey}&ipAddress=${ip}`);
       const data = response.data
-
       console.log(data)
       setDataIp(data)
     } catch (error) {
@@ -30,7 +27,6 @@ export function App() {
     }
   }
 
-  //console.log(dataIp.location.lat, dataIp.location.lng)
   return (
     <Container>
       <img 
@@ -105,14 +101,16 @@ export function App() {
       </Card>
       <Map>
         <div className="map-Container">
-          <MapContainer center={!dataIp.location ? ([51.505, -0.09]): ([dataIp.location.lat, dataIp.location.lng])} zoom={13}>
+          <MapContainer 
+            key={dataIp.location ? dataIp.location.lat + dataIp.location.lng : 'default'} 
+            center={!dataIp.location ? [51.505, -0.09] : [dataIp.location.lat, dataIp.location.lng]} zoom={5}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[51.505, -0.09]}>
+            <Marker position={!dataIp.location ? [51.505, -0.09] : [dataIp.location.lat, dataIp.location.lng]}>
               <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
+                The location of<br/> your IP address.
               </Popup>
             </Marker>
           </MapContainer>        
