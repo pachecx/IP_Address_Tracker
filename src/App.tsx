@@ -110,7 +110,7 @@ export function App() {
             />
             <Marker position={!dataIp.location ? [51.505, -0.09] : [dataIp.location.lat, dataIp.location.lng]}>
               <Popup>
-                The location of<br/> your IP address.
+                <p className="point">The location of<br/> your IP address.</p>
               </Popup>
             </Marker>
           </MapContainer>        
@@ -120,4 +120,3 @@ export function App() {
     </Container>
   )
 }
-

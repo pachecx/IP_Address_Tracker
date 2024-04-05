@@ -152,6 +152,11 @@ export const Map = styled.div`
         }
     }
 
+    .point{
+        font-size: 12px;
+        font-weight: 500;
+    }
+
     @media(min-width: 760px){
         .map-Container .leaflet-container{
             height: 62.1vh;
