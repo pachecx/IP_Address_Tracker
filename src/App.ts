@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const Container = styled.div`
     min-width: 32rem;
     width: 42rem;
@@ -149,6 +148,13 @@ export const Map = styled.div`
         .leaflet-container{
             height: 70.5vh;
             width: 100%;
+
+           
+        }
+
+        .leaflet-top {
+            top: auto;
+            bottom: 10px;
         }
     }
 

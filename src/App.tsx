@@ -13,14 +13,15 @@ export function App() {
   const [ip, setIp] = useState<string>("");
   const [dataIp, setDataIp] = useState<any>({})
 
-  const submit = async() => {
+  const Submit = async(e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
 
     if(!ip) return
     
     try {
       const response = await api.get(`?apiKey=${apiKey}&ipAddress=${ip}`);
       const data = response.data
-      console.log(data)
+      //console.log(data)
       setDataIp(data)
     } catch (error) {
       console.log(error)
@@ -42,20 +43,22 @@ export function App() {
       />
 
       <Search>
-        <h1>IP Address Tracker</h1>
-        <div className="inputDiv">
-          <input
-            type="search"
-            placeholder="Search for any IP address or domain"
-            onChange={(e) => setIp(e.target.value)}
-          />
-          <button type="submit" onClick={submit}>
-            <img
-              src={iconArrow}
-              alt="svg search"
+        <form onSubmit={(e) => {Submit(e)}}>
+          <h1>IP Address Tracker</h1>
+          <div className="inputDiv">
+            <input
+              type="search"
+              placeholder="Search for any IP address or domain"
+              onChange={(e) => setIp(e.target.value)}
             />
-          </button>
-        </div>
+            <button type="submit">
+              <img
+                src={iconArrow}
+                alt="svg search"
+              />
+            </button>
+          </div>
+        </form>
       </Search>
     
       <Card>
@@ -116,7 +119,6 @@ export function App() {
           </MapContainer>        
         </div>
       </Map>
-      
     </Container>
   )
 }

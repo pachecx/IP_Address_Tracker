@@ -5,8 +5,3 @@ export const api = axios.create({
 })
 
 export const apiKey = "at_nK83LNTdk6hnL8QpK6vXnZWXqHdJ3";
-
-//192.212.174.101
-
-
-// btn de zoom nao funcionando
