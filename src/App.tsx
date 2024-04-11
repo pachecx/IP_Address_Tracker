@@ -106,12 +106,12 @@ export function App() {
         <div className="map-Container">
           <MapContainer 
             key={dataIp.location ? dataIp.location.lat + dataIp.location.lng : 'default'} 
-            center={!dataIp.location ? [51.505, -0.09] : [dataIp.location.lat, dataIp.location.lng]} zoom={5}>
+            center={!dataIp.location ? [40.621806, -73.970135] : [dataIp.location.lat, dataIp.location.lng]} zoom={12}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={!dataIp.location ? [51.505, -0.09] : [dataIp.location.lat, dataIp.location.lng]}>
+            <Marker position={!dataIp.location ? [40.621806,-73.970135] : [dataIp.location.lat, dataIp.location.lng]}>
               <Popup>
                 <p className="point">The location of<br/> your IP address.</p>
               </Popup>
