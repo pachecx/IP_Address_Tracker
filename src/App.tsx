@@ -7,6 +7,9 @@ import { apiKey } from "./service/api.service";
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { Icon } from "leaflet";
+
+import svgIcon from './assets/marker-svgrepo-com.svg';
 
 export function App() {
 
@@ -111,7 +114,12 @@ export function App() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={!dataIp.location ? [40.621806,-73.970135] : [dataIp.location.lat, dataIp.location.lng]}>
+            <Marker 
+                position={!dataIp.location ? [40.621806,-73.970135] : [dataIp.location.lat, dataIp.location.lng]}
+                icon={new Icon({
+                  iconUrl: svgIcon,
+                })}
+              >
               <Popup>
                 <p className="point">The location of<br/> your IP address.</p>
               </Popup>
